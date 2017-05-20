@@ -18,6 +18,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'slim-rails'
 gem 'devise'
+gem 'vkontakte_api'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -39,6 +40,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do

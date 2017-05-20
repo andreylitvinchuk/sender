@@ -1,0 +1,87 @@
+.admin-panel{
+  position:relative;
+  background: #fff;
+
+  #sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 250px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #eee;
+    padding: 20px;
+  }
+
+  .sidebar-nav{
+    li{
+      margin: 10px 0;
+    }
+
+    a{
+      text-decoration: none;
+
+      &.selected{
+        font-weight: bold;
+      }
+    }
+  }
+
+  #page-content-wrapper{
+    padding-left: 270px;
+  }
+
+  .p-20{
+    padding: 20px;
+  }
+
+  .btn-small{
+    padding-top:0;
+    padding-bottom:0;
+    height: 30px;
+  }
+
+  .detail-table{
+    th, td{
+      padding: 10px;
+    }
+  }
+
+  .thumbnail{
+    max-width: 150px;
+    max-height: 150px;
+  }
+
+  .admin-map{
+    width:300px;
+    height:300px;
+  }
+
+  .text-grey{
+    color: #ccc;
+  }
+
+  table{
+    @extend .table !optional;
+
+    img, svg {
+      max-width: 100px;
+      max-height: 100px;
+    }
+  }
+
+  .field{
+    @extend .form-group !optional;
+  }
+  input[type=text]{
+    @extend .form-control !optional;
+  }
+  input[type=submit]{
+    @extend .btn !optional;
+    @extend .btn-primary !optional;
+  }
+  select{
+    @extend .form-control !optional
+  }
+}

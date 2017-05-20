@@ -1,0 +1,25 @@
+h1 Listing newsletters
+
+table
+  thead
+    tr
+      th Text
+      th Filters
+      th Start at
+      th
+      th
+      th
+
+  tbody
+    - @newsletters.each do |newsletter|
+      tr
+        td = newsletter.text
+        td = newsletter.filters
+        td = newsletter.start_at
+        td = link_to 'Show', newsletter
+        td = link_to 'Edit', edit_newsletter_path(newsletter)
+        td = link_to 'Destroy', newsletter, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Newsletter', new_newsletter_path

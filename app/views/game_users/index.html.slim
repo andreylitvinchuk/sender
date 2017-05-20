@@ -1,0 +1,29 @@
+h1 Listing game_users
+
+table
+  thead
+    tr
+      th Name
+      th Vk
+      th Level
+      th Last visit
+      th Paid
+      th
+      th
+      th
+
+  tbody
+    - @game_users.each do |game_user|
+      tr
+        td = game_user.name
+        td = game_user.vk_id
+        td = game_user.level
+        td = game_user.last_visit
+        td = game_user.paid
+        td = link_to 'Show', game_user
+        td = link_to 'Edit', edit_game_user_path(game_user)
+        td = link_to 'Destroy', game_user, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Game user', new_game_user_path

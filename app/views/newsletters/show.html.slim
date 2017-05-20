@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Text:
+  = @newsletter.text
+p
+  strong Filters:
+  = @newsletter.filters
+p
+  strong Start at:
+  = @newsletter.start_at
+
+= link_to 'Edit', edit_newsletter_path(@newsletter)
+'|
+= link_to 'Back', newsletters_path

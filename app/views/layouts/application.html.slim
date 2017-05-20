@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title SqSender
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    .container-fluid.admin-panel
+      #sidebar-wrapper
+        .sidebar-nav
+      #page-content-wrapper
+        .p-20
+          -if notice.present?
+            .notice.alert.alert-info = notice
+          -if alert.present?
+            .alert.alert-danger = alert
+          = yield
