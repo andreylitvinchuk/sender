@@ -1,18 +1,44 @@
-= form_for @newsletter do |f|
-  - if @newsletter.errors.any?
+= form_for @newsletter_form do |f|
+  - if @newsletter_form.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@newsletter.errors.count, "error")} prohibited this newsletter from being saved:"
+      h2 = "#{pluralize(@newsletter_form.errors.count, "error")} prohibited this newsletter from being saved:"
       ul
-        - @newsletter.errors.full_messages.each do |message|
+        - @newsletter_form.errors.full_messages.each do |message|
           li = message
 
   .field
-    = f.label :text
-    = f.text_area :text
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+
   .field
-    = f.label :filters
-    = f.text_field :filters
+    =f.label :filters
+    table
+      tbody#filters_container
+        tr
+          th Свойство
+          th Правило
+          th Значение
+          th
+
+          -@newsletter_form.filters.each do |filter, key|
+            tr
+              td = select_tag "newsletter[filters][#{key}][prop_name]", options_for_select(Player.prop_names, filter['prop_name'])
+              td = select_tag "newsletter[filters][#{key}][logic]", options_for_select([:eq, :gteq, :lteq], filter['logic'])
+              td = text_field_tag "newsletter[filters][#{key}][value]", filter['value']
+              td =link_to 'remove', '#', data: {remove_news_letter_filter_item: ''}
+      tfoot
+        tr
+          td colspan=3
+            =link_to 'add', '#', data: {add_news_letter_filter: ''}
+          /tr
+            td = select_tag 'newsletter[filters][][prop_name]', options_for_select([''] + Player.prop_names)
+            td = select_tag 'newsletter[filters][][logic]', options_for_select(['', :eq, :gteq, :lteq])
+            td = text_field_tag 'newsletter[filters][][value]'
+  .field
+    = f.label :text
+    = f.text_area :text, class: 'form-control'
   .field
     = f.label :start_at
-    = f.datetime_select :start_at
+    .form-inline
+      = f.datetime_select :start_at
   .actions = f.submit

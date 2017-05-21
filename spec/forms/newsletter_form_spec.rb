@@ -26,6 +26,10 @@ RSpec.describe NewsletterForm, type: :form do
     expect(newsletter_form.errors[:start_at]).to include("can't be blank")
   end
 
+  it 'should response text' do
+    expect(newsletter_form).to respond_to :text
+  end
+
   context 'require filters' do
 
     it 'presence' do

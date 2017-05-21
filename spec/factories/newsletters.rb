@@ -4,12 +4,12 @@ FactoryGirl.define do
     filters [{
                prop_name: 'level',
                logic: 'qteq',
-               value: '10'
+               value: '1'
              }, {
                prop_name: 'level',
                logic: 'lteq',
-               value: '12'
+               value: '10'
              }]
-    start_at "2017-05-21 01:13:59"
+    sequence(:start_at) { |n| Time.now + n.minutes }
   end
 end

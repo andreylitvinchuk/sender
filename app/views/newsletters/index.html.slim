@@ -14,7 +14,12 @@ table
     - @newsletters.each do |newsletter|
       tr
         td = newsletter.text
-        td = newsletter.filters
+        td
+          -newsletter.filters.each do |filter|
+            div
+              = filter['prop_name'] + ' | '
+              = filter['logic'] + ' | '
+              = filter['value']
         td = newsletter.start_at
         td = link_to 'Show', newsletter
         td = link_to 'Edit', edit_newsletter_path(newsletter)

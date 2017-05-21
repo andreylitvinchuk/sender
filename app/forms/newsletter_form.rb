@@ -5,6 +5,7 @@ class NewsletterForm < Reform::Form
   property :name
   property :filters
   property :start_at
+  property :text
 
   validates :name, :filters, :start_at, presence: true
 
@@ -12,7 +13,7 @@ class NewsletterForm < Reform::Form
 
 
   def save
-    # sync
+    sync.save
   end
 
   private
@@ -24,10 +25,9 @@ class NewsletterForm < Reform::Form
   def filters_have_fields?
     if filters.class == Array
       filters.each do |filter|
-        puts filter
-        errors.add(:filters, 'should contain key prop_name') unless filter.has_key? :prop_name
-        errors.add(:filters, 'should contain key logic') unless filter.has_key? :logic
-        errors.add(:filters, 'should contain key value') unless filter.has_key? :value
+        errors.add(:filters, 'should contain key prop_name') unless filter.has_key? 'prop_name'
+        errors.add(:filters, 'should contain key logic') unless filter.has_key? 'logic'
+        errors.add(:filters, 'should contain key value') unless filter.has_key? 'value'
       end
     else
       errors.add(:filters, 'should contain key prop_name')

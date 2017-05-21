@@ -10,21 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520221359) do
+ActiveRecord::Schema.define(version: 20170521191334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "game_users", force: :cascade do |t|
-    t.string "name"
-    t.string "vk_id"
-    t.integer "level"
-    t.datetime "last_visit"
-    t.boolean "paid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["vk_id"], name: "index_game_users_on_vk_id"
-  end
 
   create_table "games", force: :cascade do |t|
     t.string "name"
@@ -39,6 +28,28 @@ ActiveRecord::Schema.define(version: 20170520221359) do
     t.datetime "start_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "name"
+    t.string "vk_id"
+    t.integer "level"
+    t.datetime "last_visit"
+    t.boolean "paid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vk_id"], name: "index_players_on_vk_id"
+  end
+
+  create_table "recipients", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "newsletter_id"
+    t.boolean "sent", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["newsletter_id"], name: "index_recipients_on_newsletter_id"
+    t.index ["player_id"], name: "index_recipients_on_player_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,4 +69,6 @@ ActiveRecord::Schema.define(version: 20170520221359) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "recipients", "newsletters"
+  add_foreign_key "recipients", "players"
 end

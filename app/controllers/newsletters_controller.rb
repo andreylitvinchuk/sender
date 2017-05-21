@@ -1,4 +1,6 @@
+require_relative '../forms/newsletter_form'
 class NewslettersController < ApplicationController
+
   before_action :set_newsletter, only: [:show, :edit, :update, :destroy]
 
   # GET /newsletters
@@ -14,7 +16,7 @@ class NewslettersController < ApplicationController
 
   # GET /newsletters/new
   def new
-    @newsletter = Newsletter.new
+    @newsletter_form = NewsletterForm.new(Newsletter.new())
   end
 
   # GET /newsletters/1/edit
@@ -24,11 +26,12 @@ class NewslettersController < ApplicationController
   # POST /newsletters
   # POST /newsletters.json
   def create
-    @newsletter = Newsletter.new(newsletter_params)
+    @newsletter_form = NewsletterForm.new(Newsletter.new(newsletter_params))
 
     respond_to do |format|
-      if @newsletter.save
-        format.html { redirect_to @newsletter, notice: 'Newsletter was successfully created.' }
+      if @newsletter_form.validate(newsletter_params)
+        @newsletter_form.save
+        format.html { redirect_to newsletters_path, notice: 'Newsletter was successfully created.' }
         format.json { render :show, status: :created, location: @newsletter }
       else
         format.html { render :new }
@@ -40,13 +43,15 @@ class NewslettersController < ApplicationController
   # PATCH/PUT /newsletters/1
   # PATCH/PUT /newsletters/1.json
   def update
+    @newsletter_form = NewsletterForm.new(@newsletter)
     respond_to do |format|
-      if @newsletter.update(newsletter_params)
-        format.html { redirect_to @newsletter, notice: 'Newsletter was successfully updated.' }
+      if @newsletter_form.validate(newsletter_params)
+        @newsletter_form.save
+        format.html { redirect_to newsletters_path, notice: 'Newsletter was successfully updated.' }
         format.json { render :show, status: :ok, location: @newsletter }
       else
         format.html { render :edit }
-        format.json { render json: @newsletter.errors, status: :unprocessable_entity }
+        format.json { render json: @newsletter_form.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,10 +70,20 @@ class NewslettersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_newsletter
       @newsletter = Newsletter.find(params[:id])
+      @newsletter_form = NewsletterForm.new(@newsletter)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def newsletter_params
-      params.require(:newsletter).permit(:text, :filters, :start_at)
+      params.require(:newsletter).permit(
+        :name,
+        :text,
+        :start_at,
+        filters: [
+          :prop_name,
+          :logic,
+          :value
+        ]
+      )
     end
 end
