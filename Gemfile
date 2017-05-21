@@ -35,7 +35,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'reform', '>= 2.2.0'
 gem 'reform-rails'
 gem 'dry-validation'
-
+gem 'sidekiq'
+gem 'ransack'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -46,6 +47,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails'
   gem 'rails-controller-testing'
+  gem 'rspec-sidekiq'
 end
 
 group :development do
