@@ -1,14 +1,23 @@
 p#notice = notice
 
-p
+div
   strong Text:
   = @newsletter.text
-p
-  strong Filters:
-  = @newsletter.filters
-p
+div
   strong Start at:
   = @newsletter.start_at
+div
+  strong Filters:
+  - @newsletter.filters.each do |filter|
+    div
+      = filter['prop_name'] + ' | '
+      = filter['logic'] + ' | '
+      = filter['value']
+div
+  strong Progress
+  div#stat
+    = "#{@newsletter.recipients.where(sent: true).count} / #{@newsletter.recipients.count}"
+
 
 = link_to 'Edit', edit_newsletter_path(@newsletter)
 '|
