@@ -10,6 +10,10 @@ html
     .container-fluid.admin-panel
       #sidebar-wrapper
         .sidebar-nav
+          ul.list-unstyled
+            li =link_to 'Games', games_path
+            li =link_to 'Players', players_path
+            li =link_to 'Newsletters', newsletters_path
       #page-content-wrapper
         .p-20
           -if notice.present?
