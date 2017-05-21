@@ -7,3 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create_with(password: 'admin1').find_or_create_by(email: 'admin@example.com')
+
+if Player.all.blank?
+  10000.times do
+    Player.create(
+      name: "User #{rand(999)}",
+      vk_id: "id#{rand(9999999)}",
+      level: rand(30),
+      paid: rand(10).even?
+    )
+  end
+end
