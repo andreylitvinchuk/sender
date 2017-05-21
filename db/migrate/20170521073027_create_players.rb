@@ -1,6 +1,6 @@
-class CreateGameUsers < ActiveRecord::Migration[5.1]
+class CreatePlayers < ActiveRecord::Migration[5.1]
   def change
-    create_table :game_users do |t|
+    create_table :players do |t|
       t.string :name
       t.string :vk_id
       t.integer :level
@@ -9,6 +9,6 @@ class CreateGameUsers < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :game_users, :vk_id
+    add_index :players, :vk_id
   end
 end

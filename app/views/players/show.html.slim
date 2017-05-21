@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @player.name
+p
+  strong Vk:
+  = @player.vk_id
+p
+  strong Level:
+  = @player.level
+p
+  strong Last visit:
+  = @player.last_visit
+p
+  strong Paid:
+  = @player.paid
+
+= link_to 'Edit', edit_player_path(@player)
+'|
+= link_to 'Back', players_path

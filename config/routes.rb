@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :players
   resources :newsletters
   resources :game_users
   resources :games
