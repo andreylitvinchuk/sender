@@ -62,9 +62,9 @@ RSpec.describe NewslettersController, type: :controller do
 
     describe "GET #index" do
       it "assigns all newsletters as @newsletters" do
-        newsletter = Newsletter.create! valid_attributes
+        newsletter = FactoryGirl.create(:newsletter)
         get :index, params: {}, session: valid_session
-        expect(assigns(:newsletters)).to eq([newsletter])
+        expect(assigns(:newsletters).count).to eq Newsletter.all.count
       end
     end
 
@@ -77,9 +77,9 @@ RSpec.describe NewslettersController, type: :controller do
     end
 
     describe "GET #new" do
-      it "assigns a new newsletter as @newsletter" do
+      it "assigns a new newsletter as @newsletter_form.model" do
         get :new, params: {}, session: valid_session
-        expect(assigns(:newsletter)).to be_a_new(Newsletter)
+        expect(assigns(:newsletter_form).model).to be_a_new(Newsletter)
       end
     end
 
@@ -99,22 +99,22 @@ RSpec.describe NewslettersController, type: :controller do
           }.to change(Newsletter, :count).by(1)
         end
 
-        it "assigns a newly created newsletter as @newsletter" do
+        it "assigns a newly created newsletter as @newsletter_form.model" do
           post :create, params: {newsletter: valid_attributes}, session: valid_session
-          expect(assigns(:newsletter)).to be_a(Newsletter)
-          expect(assigns(:newsletter)).to be_persisted
+          expect(assigns(:newsletter_form).model).to be_a(Newsletter)
+          expect(assigns(:newsletter_form)).to be_persisted
         end
 
         it "redirects to the created newsletter" do
           post :create, params: {newsletter: valid_attributes}, session: valid_session
-          expect(response).to redirect_to(Newsletter.last)
+          expect(response).to redirect_to(newsletters_path)
         end
       end
 
       context "with invalid params" do
-        it "assigns a newly created but unsaved newsletter as @newsletter" do
+        it "assigns a newly created but unsaved newsletter as @newsletter_form.model" do
           post :create, params: {newsletter: invalid_attributes}, session: valid_session
-          expect(assigns(:newsletter)).to be_a_new(Newsletter)
+          expect(assigns(:newsletter_form).model).to be_a_new(Newsletter)
         end
 
         it "re-renders the 'new' template" do
@@ -146,7 +146,7 @@ RSpec.describe NewslettersController, type: :controller do
         it "redirects to the newsletter" do
           newsletter = Newsletter.create! valid_attributes
           put :update, params: {id: newsletter.to_param, newsletter: valid_attributes}, session: valid_session
-          expect(response).to redirect_to(newsletter)
+          expect(response).to redirect_to(newsletters_path)
         end
       end
 
