@@ -1,10 +1,8 @@
 require 'rails_helper'
 RSpec.describe StartNewsletterWorker, type: :worker do
 
-
-
   before(:all) do
-    100.times do
+    1000.times do
       FactoryGirl.create(:player)
     end
 
