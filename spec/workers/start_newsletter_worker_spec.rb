@@ -4,7 +4,7 @@ RSpec.describe StartNewsletterWorker, type: :worker do
 
 
   before(:all) do
-    1000.times do
+    100.times do
       FactoryGirl.create(:player)
     end
 
