@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :recipient do
-    player nil
-    newsletter nil
+    player
+    newsletter
     sent false
   end
 end
