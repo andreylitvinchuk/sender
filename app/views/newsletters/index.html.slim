@@ -3,7 +3,7 @@ h1 Newsletters
 table
   thead
     tr
-      th Text
+      th Name
       th Filters
       th Start at
       th
@@ -13,7 +13,7 @@ table
   tbody
     - @newsletters.each do |newsletter|
       tr
-        td = newsletter.text
+        td = newsletter.name
         td
           -newsletter.filters.each do |filter|
             div

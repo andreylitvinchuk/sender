@@ -1,22 +1,30 @@
 p#notice = notice
 
 div
+  strong Name:
+  div
+  = @newsletter.name
+div.mt-10
   strong Text:
+  div
   = @newsletter.text
-div
+div.mt-10
   strong Start at:
+  div
   = @newsletter.start_at
-div
+div.mt-10
   strong Filters:
   - @newsletter.filters.each do |filter|
     div
       = filter['prop_name'] + ' | '
       = filter['logic'] + ' | '
       = filter['value']
-div
+div.mt-10
   strong Progress
   div#stat
-    = "#{@newsletter.recipients.where(sent: true).count} / #{@newsletter.recipients.count}"
+    div = "Success:   #{@newsletter.recipients.where(sent: true).count}"
+    div = "Errors:    #{@newsletter.recipients.where(error: true).count}"
+    div = "Total:     #{@newsletter.recipients.count}"
 
 
 = link_to 'Edit', edit_newsletter_path(@newsletter)

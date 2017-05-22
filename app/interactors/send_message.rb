@@ -10,8 +10,9 @@ class SendMessage
       #todo realize send message
       sleep(5.seconds)
       if rand(2).even?
-        recipient.update_attribute(:sent, true)
+        recipient.update_attributes(sent: true, error: false)
       else
+        recipient.update_attribute(:error, true)
         context.fail!(message: 'sent failed')
       end
 

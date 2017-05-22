@@ -1,7 +1,7 @@
 class StartNewsletterWorker
   include Sidekiq::Worker
   # sidekiq_options queue: 'default', :backtrace => true
-  sidekiq_options :retry => 0
+  sidekiq_options :retry => 1
 
   def perform(newsletter_id)
     logger.info "StartNewsletterWorker are happening."
