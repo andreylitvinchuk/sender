@@ -1,0 +1,14 @@
+#config/redis.yml
+default:
+  host: localhost
+  port: 6379
+development:
+  db: 0
+#  namespace: sq_sender
+test:
+  db: 1
+#  namespace: sq_sender
+production:
+  db: 2
+  host: 192.168.1.100
+#  namespace: sq_sender
