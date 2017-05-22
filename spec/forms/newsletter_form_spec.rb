@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe NewsletterForm, type: :form do
-  let(:newsletter) {Newsletter.new}
-  let(:newsletter_form) {NewsletterForm.new(newsletter)}
+  let(:newsletter) { Newsletter.new }
+  let(:newsletter_form) { NewsletterForm.new(newsletter) }
 
   it 'should ba valid' do
     newsletter_form.validate(
@@ -11,7 +11,7 @@ RSpec.describe NewsletterForm, type: :form do
         { prop_name: 'level', logic: 'qteq', value: '10' },
         { prop_name: 'level', logic: 'lteq', value: '12' }
       ],
-      start_at: DateTime.now
+      start_at: 3.hours.from_now
     )
     expect(newsletter_form).to be_valid
   end
