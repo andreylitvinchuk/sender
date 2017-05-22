@@ -1,4 +1,5 @@
 require_relative '../forms/newsletter_form'
+require_relative '../workers/start_newsletter_worker'
 class NewslettersController < ApplicationController
 
   before_action :set_newsletter, only: [:show, :edit, :update, :destroy]
@@ -17,6 +18,7 @@ class NewslettersController < ApplicationController
   # GET /newsletters/new
   def new
     @newsletter_form = NewsletterForm.new(Newsletter.new())
+    @newsletter_form.filters = []
   end
 
   # GET /newsletters/1/edit
@@ -44,6 +46,7 @@ class NewslettersController < ApplicationController
   # PATCH/PUT /newsletters/1.json
   def update
     @newsletter_form = NewsletterForm.new(@newsletter)
+
     respond_to do |format|
       if @newsletter_form.validate(newsletter_params)
         @newsletter_form.save
